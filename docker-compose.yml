@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  app-server:
+    image: samdevelopment/vue:v2-dev
+    build:
+      context: docker/vue
+      dockerfile: Dockerfile
+    volumes:
+      - .:/opt/app
+    ports:
+      - $APP_PORT:80
+    command: yarn serve --port 80
+
+  vue-cli:
+    image: samdevelopment/vue:v2-dev
+    build:
+      context: docker/vue
+      dockerfile: Dockerfile
+    volumes:
+      - .:/opt/app
+    ports:
+      - $CLI_UI_PORT:80
+    command: vue ui --host 0.0.0.0 --port 80
